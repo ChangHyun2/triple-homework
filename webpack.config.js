@@ -2,21 +2,16 @@ const path = require('path')
 
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const config = {
   entry: './src/index.tsx',
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    assetModuleFilename: 'images/[hash][ext][query]',
     clean: true,
-  },
-  devtool: 'inline-source-map',
-  devServer: {
-    hot: true,
-    static: {
-      directory: path.join(__dirname, 'public'),
-    },
-    port: 9000,
   },
   module: {
     rules: [
@@ -26,7 +21,7 @@ const config = {
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/,
-        use: 'asset/resource',
+        type: 'asset/resource',
       },
       {
         test: /\.tsx?$/,
@@ -48,12 +43,20 @@ const config = {
 module.exports = (env, argv) => {
   if (argv.mode === 'development') {
     config.mode = 'development'
+    config.devServer = {
+      hot: true,
+      static: {
+        directory: path.join(__dirname, 'public'),
+      },
+      port: 9000,
+    }
+    config.devtool = 'inline-source-map'
     config.plugins.push(new webpack.HotModuleReplacementPlugin())
   }
 
   if (argv.mode === 'production') {
     config.mode = 'production'
-    //
+    config.plugins.push(new BundleAnalyzerPlugin())
   }
 
   return config
