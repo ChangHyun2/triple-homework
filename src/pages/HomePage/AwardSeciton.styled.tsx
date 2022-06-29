@@ -1,6 +1,8 @@
 import styled from '@emotion/styled'
 import s from 'csd'
 
+import { fadeInFromBottomAnimationCss } from '@utils/animation'
+
 export const StyledAwardSection = styled.section`
   ${s.rowSpaceBetween};
   align-items: start;
@@ -9,7 +11,7 @@ export const StyledAwardSection = styled.section`
   min-width: 1060px;
 `
 
-export const StyledHeroImage = styled.div`
+export const StyledAwardHeroImage = styled.div<{ inView: boolean }>`
   position: relative;
   width: 400px;
   height: 338px;
@@ -20,13 +22,15 @@ export const StyledHeroImage = styled.div`
     left: 50%;
     transform: translate(-50%);
   }
+
+  ${({ inView }) => (inView ? fadeInFromBottomAnimationCss('700ms') : '')}
 `
 
 export const StyledAwardDetail = styled.div`
   ${s.col}
 `
 
-export const StyledAwardReasons = styled.ul`
+export const StyledAwardReasons = styled.ul<{ inView: boolean }>`
   font-size: 36px;
   margin-bottom: 50px;
 
@@ -34,9 +38,12 @@ export const StyledAwardReasons = styled.ul`
     ${s.mb2}
     line-height: 1;
   }
+
+  ${({ inView }) => (inView ? fadeInFromBottomAnimationCss('700ms') : '')}
+  animation-delay:100ms;
 `
 
-export const StyledAwardBadges = styled.ul`
+export const StyledAwardBadges = styled.ul<{ inView: boolean }>`
   ${s.row}
 
   li {
@@ -52,4 +59,7 @@ export const StyledAwardBadges = styled.ul`
   li:first-of-type {
     margin-right: 40px;
   }
+
+  ${({ inView }) => (inView ? fadeInFromBottomAnimationCss('700ms') : '')}
+  animation-delay:200ms;
 `

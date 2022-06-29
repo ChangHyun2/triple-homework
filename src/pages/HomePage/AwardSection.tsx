@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react'
+
 import {
   StyledAwardSection,
-  StyledHeroImage,
+  StyledAwardHeroImage,
   StyledAwardDetail,
   StyledAwardReasons,
   StyledAwardBadges,
@@ -13,15 +15,21 @@ import Image from '@components/Image'
 import Counter from '@components/Counter'
 
 export default function AwardSection() {
+  const [inView, setInView] = useState(false)
+
+  useEffect(() => {
+    setInView(true)
+  })
+
   return (
     <StyledAwardSection>
-      <StyledHeroImage>
+      <StyledAwardHeroImage inView={inView}>
         <Image src={triple2xSrc} alt="트리플 앱 2018 구글 플레이스토어 수상" />
         <div className="hero-image-label">2021년 12월 기준</div>
-      </StyledHeroImage>
+      </StyledAwardHeroImage>
       <StyledAwardDetail className="detail">
         <div>
-          <StyledAwardReasons>
+          <StyledAwardReasons inView>
             <p>
               <strong>
                 <Counter start={0} end={700} milliSec={2000} />만 명
@@ -41,7 +49,7 @@ export default function AwardSection() {
               의 여행 일정
             </p>
           </StyledAwardReasons>
-          <StyledAwardBadges>
+          <StyledAwardBadges inView>
             <li>
               <Image
                 width="50px"
