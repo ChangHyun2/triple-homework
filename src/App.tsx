@@ -1,10 +1,9 @@
-import appleBadgeSrc from './public/assets/badge-apple4x.png'
+import HomePage from '@pages/HomePage'
 
 export default function App() {
   return (
     <div>
-      app
-      <img src={appleBadgeSrc} alt="img" />
+      <HomePage />
     </div>
   )
 }
