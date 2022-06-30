@@ -1,8 +1,6 @@
 import styled from '@emotion/styled'
 import s from 'csd'
 
-import { fadeInFromBottomAnimationCss } from '@utils/animation'
-
 export const StyledAwardSection = styled.section`
   ${s.rowSpaceBetween};
   align-items: start;
@@ -23,7 +21,11 @@ export const StyledAwardHeroImage = styled.div<{ inView: boolean }>`
     transform: translate(-50%);
   }
 
-  ${({ inView }) => (inView ? fadeInFromBottomAnimationCss('700ms') : '')}
+  transition: opacity 700ms ease-in, transform 700ms ease-in;
+  ${({ inView }) =>
+    inView
+      ? `opacity: 1; transform: translateY(0px);`
+      : `opacity: 0; transform: translateY(10px);`}
 `
 
 export const StyledAwardDetail = styled.div`
@@ -39,8 +41,12 @@ export const StyledAwardReasons = styled.ul<{ inView: boolean }>`
     line-height: 1;
   }
 
-  ${({ inView }) => (inView ? fadeInFromBottomAnimationCss('700ms') : '')}
-  animation-delay:100ms;
+  transition: opacity 700ms ease-in, transform 700ms ease-in;
+  ${({ inView }) =>
+    inView
+      ? `opacity: 1; transform: translateY(0px);`
+      : `opacity: 0; transform: translateY(10px);`}
+  transition-delay:100ms;
 `
 
 export const StyledAwardBadges = styled.ul<{ inView: boolean }>`
@@ -60,6 +66,10 @@ export const StyledAwardBadges = styled.ul<{ inView: boolean }>`
     margin-right: 40px;
   }
 
-  ${({ inView }) => (inView ? fadeInFromBottomAnimationCss('700ms') : '')}
-  animation-delay:200ms;
+  transition: opacity 700ms ease-in, transform 700ms ease-in;
+  ${({ inView }) =>
+    inView
+      ? `opacity: 1; transform: translateY(0px);`
+      : `opacity: 0; transform: translateY(10px);`}
+  transition-delay:200ms;
 `
