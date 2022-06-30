@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import { StyledCounter } from './index.styled'
 
 import useAnimationCount from '@hooks/useAnimationCount'
@@ -6,10 +8,22 @@ interface CounterProps {
   start: number
   end: number
   milliSec: number
+  shouldRequestAnimation: boolean
 }
 
-export default function Counter({ start, end, milliSec }: CounterProps) {
-  const count = useAnimationCount(start, end, milliSec)
+export default function AnimationCounter({
+  start,
+  end,
+  milliSec,
+  shouldRequestAnimation,
+}: CounterProps) {
+  const [count, requestAnimation] = useAnimationCount(0, end, milliSec)
+
+  useEffect(() => {
+    if (shouldRequestAnimation) {
+      requestAnimation()
+    }
+  }, [shouldRequestAnimation])
 
   return (
     <StyledCounter>

@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 
 export default function useAnimationCount(
   start: number,
   end: number,
   milliSec: number,
-) {
+): [number, () => void] {
   const [count, setCount] = useState(start)
   const startAt = useRef<number | null>(null)
 
@@ -28,9 +28,10 @@ export default function useAnimationCount(
     [start, end, milliSec],
   )
 
-  useEffect(() => {
-    requestAnimationFrame(increase)
-  }, [increase])
+  const requestAnimation = useCallback(
+    () => requestAnimationFrame(increase),
+    [increase],
+  )
 
-  return count
+  return [count, requestAnimation]
 }
