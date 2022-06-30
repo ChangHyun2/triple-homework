@@ -12,6 +12,7 @@
     "@types/react-dom": "^18.0.5",
     "css-loader": "^6.7.1",
     "eslint-config-triple": "^0.5.1",
+    "gh-pages": "^4.0.0",
     "html-webpack-plugin": "^5.5.0",
     "style-loader": "^3.3.1",
     "ts-loader": "^9.3.1",
@@ -28,7 +29,8 @@
     "lint:es": "eslint 'src/**/*.{js,ts,tsx}'",
     "lint:es:fix": "npm run lint:es -- --fix",
     "prettier": "prettier 'src/**/*' --check",
-    "prettier:fix": "prettier 'src/**/*' --write"
+    "prettier:fix": "prettier 'src/**/*' --write",
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",

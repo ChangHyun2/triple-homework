@@ -63,7 +63,7 @@ module.exports = (env, argv) => {
 
   if (argv.mode === 'production') {
     config.mode = 'production'
-    config.plugins.push(new BundleAnalyzerPlugin())
+    // config.plugins.push(new BundleAnalyzerPlugin())
   }
 
   return config
