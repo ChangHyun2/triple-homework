@@ -2,7 +2,7 @@ import { MouseEventHandler } from 'react'
 import styled from '@emotion/styled'
 import s from 'csd'
 
-import { bounceAnimationCss } from '@utils/animation'
+import { bounceAnimationCss } from '@utils/keyframes'
 
 const StyledInstallSection = styled.section<{ inView: boolean }>`
   ${s.colCenter}
