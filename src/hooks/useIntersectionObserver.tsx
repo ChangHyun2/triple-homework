@@ -51,9 +51,17 @@ export default function useIntersectionObserver(
   }, [])
 
   useEffect(() => {
-    observe(observedRef.current!)
+    const observedElement = observedRef.current
 
-    return () => unObserve(observedRef.current!)
+    if (!observedElement) {
+      return
+    }
+
+    observe(observedElement)
+
+    return () => {
+      unObserve(observedElement)
+    }
   }, [observe, unObserve, observedRef])
 
   return { inView, observe, unObserve }

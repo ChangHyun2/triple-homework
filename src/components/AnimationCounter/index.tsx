@@ -23,7 +23,7 @@ export default function AnimationCounter({
     if (shouldRequestAnimation) {
       requestAnimation()
     }
-  }, [shouldRequestAnimation])
+  }, [shouldRequestAnimation, requestAnimation])
 
   return (
     <StyledCounter>

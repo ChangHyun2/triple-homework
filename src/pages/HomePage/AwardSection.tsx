@@ -20,8 +20,11 @@ export default forwardRef<HTMLElement>(function AwardSection(props, ref) {
   const { inView, unObserve } = useIntersectionObserver(observerRef, {})
 
   useEffect(() => {
+    if (!observerRef.current) {
+      return
+    }
     if (inView) {
-      unObserve(observerRef.current!)
+      unObserve(observerRef.current)
     }
   }, [inView, unObserve])
 
