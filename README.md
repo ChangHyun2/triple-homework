@@ -93,7 +93,7 @@ position: relative;
 ## 1.2 useAnimationCount 훅
 
 최대 fps를 60으로 설정하였고 ease-in 효과를 주기 위해 타원방정식을 이용해 fps(y축)를 progress(x축)에 따라 감소시켰습니다.
-처음에는 최소 fps를 0으로 설정해 함수를 적용시켰었는데요. 끝부분에서 애니메이션 처리가 매끄럽지 못 해 fps 최소값을 4로 보정했습니다.
+처음에는 최소 fps를 0으로 설정해 함수를 적용시켰었는데요. 끝부분에서 애니메이션 처리가 매끄럽지 못 해 fps 최소값을 5로 보정했습니다.
 
 ```ts
 const draw = useCallback(
@@ -104,15 +104,15 @@ const draw = useCallback(
     }
 
     // x축:t , y축:progress
-    const spf = 1 / FpsRef.current
+    const spf = 1 / fps.current
     const startAt = startAtRef.current
 
     const t = timestamp - startAt
     const progress = t / milliSec
 
     // 타원에서 y축 offset 4
-    FpsRef.current =
-      Math.abs(60 * (Math.sqrt(1 - (progress - 1) ** 2) - 1)) + 20
+    fps.current =
+      Math.abs(MAX_FPX * (Math.sqrt(1 - (progress - 1) ** 2) - 1)) + 5
 
     if ((timestamp - prevTimeStamp) / 1000 < spf) {
       requestAnimationFrame((timestamp) => draw(timestamp, prevTimeStamp))
@@ -166,3 +166,6 @@ IntersectionObserver를 적용해 AwardSection이 노출될 때, Counter 애니�
 ## 3. 환경설정
 
 웹팩을 공식문서를 참고해 작업했습니다.
+
+webpack 절대 경로 설정 후 eslint가 import 구문을 해석하지 못 하는 에러에서 오랜 시간을 헤맸었는데요. 아래 링크를 통해 해결하였습니다.
+// https://github.com/import-js/eslint-plugin-import/issues/1306
