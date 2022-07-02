@@ -2,8 +2,8 @@ const path = require('path')
 
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const BundleAnalyzerPlugin =
-  require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+// const BundleAnalyzerPlugin =
+//   require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const config = {
   entry: './src/index.tsx',
@@ -38,11 +38,12 @@ const config = {
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
     alias: {
-      '@assets': path.resolve(__dirname, 'src/public/assets'),
-      '@components': path.resolve(__dirname, 'src/components'),
-      '@hooks': path.resolve(__dirname, 'src/hooks'),
-      '@utils': path.resolve(__dirname, 'src/utils'),
-      '@pages': path.resolve(__dirname, 'src/pages'),
+      // https://github.com/import-js/eslint-plugin-import/issues/1306
+      '~/assets': path.resolve(__dirname, 'src/public/assets'),
+      '~/components': path.resolve(__dirname, 'src/components'),
+      '~/hooks': path.resolve(__dirname, 'src/hooks'),
+      '~/utils': path.resolve(__dirname, 'src/utils'),
+      '~/pages': path.resolve(__dirname, 'src/pages'),
     },
   },
 }

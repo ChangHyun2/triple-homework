@@ -8,12 +8,12 @@ import {
   StyledAwardBadges,
 } from './AwardSeciton.styled'
 
-import badgeApple4xSrc from '@assets/badge-apple4x.png'
-import playStore2xSrc from '@assets/play-store2x.png'
-import triple2xSrc from '@assets/triple2x.png'
-import Image from '@components/Image'
-import AnimationCounter from '@components/AnimationCounter'
-import useIntersectionObserver from '@hooks/useIntersectionObserver'
+import badgeApple4xSrc from '~/assets/badge-apple4x.png'
+import playStore2xSrc from '~/assets/play-store2x.png'
+import triple2xSrc from '~/assets/triple2x.png'
+import Image from '~/components/Image'
+import AnimationCounter from '~/components/AnimationCounter'
+import useIntersectionObserver from '~/hooks/useIntersectionObserver'
 
 export default forwardRef<HTMLElement>(function AwardSection(props, ref) {
   const observerRef = useRef<HTMLDivElement>(null)

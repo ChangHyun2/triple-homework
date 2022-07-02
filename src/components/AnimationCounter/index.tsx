@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import { StyledCounter } from './index.styled'
 
-import useAnimationCount from '@hooks/useAnimationCount'
+import useAnimationCount from '~/hooks/useAnimationCount'
 
 interface CounterProps {
   start: number
