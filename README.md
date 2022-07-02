@@ -1,6 +1,10 @@
 # triple-homework
 
+깃헙 페이지 배포 링크 : https://changhyun2.github.io/triple-homework/
+
 triple homework
+
+로컬 실행 방법입니다.
 
 ```
 nvm use v16.13.1

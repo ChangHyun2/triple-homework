@@ -30,7 +30,7 @@
     "lint:es:fix": "npm run lint:es -- --fix",
     "prettier": "prettier 'src/**/*' --check",
     "prettier:fix": "prettier 'src/**/*' --write",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "npm run build && ./node_modules/.bin/gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",
