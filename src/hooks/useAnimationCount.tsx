@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 
-const MAX_FPX = 60
+const MAX_FPS = 60
 
 export default function useAnimationCount(
   start: number,
@@ -9,7 +9,7 @@ export default function useAnimationCount(
 ): [number, () => void] {
   const [count, setCount] = useState(start)
   const startAtRef = useRef<number | null>(null)
-  const fps = useRef(MAX_FPX)
+  const fps = useRef(MAX_FPS)
 
   const draw = useCallback(
     (timestamp: number, prevTimeStamp: number) => {
@@ -27,7 +27,7 @@ export default function useAnimationCount(
 
       // 타원에서 y축 offset 4
       fps.current =
-        Math.abs(MAX_FPX * (Math.sqrt(1 - (progress - 1) ** 2) - 1)) + 5
+        Math.abs(MAX_FPS * (Math.sqrt(1 - (progress - 1) ** 2) - 1)) + 5
 
       if ((timestamp - prevTimeStamp) / 1000 < spf) {
         requestAnimationFrame((timestamp) => draw(timestamp, prevTimeStamp))

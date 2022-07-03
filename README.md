@@ -105,7 +105,7 @@ position: relative;
 
 ### 1.2 useAnimationCount 훅
 
-최대 fps를 60으로 설정하였고 ease-in 효과를 주기 위해 타원방정식을 이용해 fps(y축)를 progress(x축)에 따라 감소시켰습니다.
+최대 fps를 60으로 설정하였고 ease-out 효과를 주기 위해 타원방정식을 이용해 fps(y축)를 progress(x축)에 따라 감소시켰습니다.
 처음에는 최소 fps를 0으로 설정해 함수를 적용시켰었는데요. 끝부분에서 애니메이션 처리가 매끄럽지 못 해 fps 최소값을 5로 보정했습니다.
 
 ```ts
@@ -125,7 +125,7 @@ const draw = useCallback(
 
     // 타원에서 y축 offset 4
     fps.current =
-      Math.abs(MAX_FPX * (Math.sqrt(1 - (progress - 1) ** 2) - 1)) + 5
+      Math.abs(MAX_FPS * (Math.sqrt(1 - (progress - 1) ** 2) - 1)) + 5
 
     if ((timestamp - prevTimeStamp) / 1000 < spf) {
       requestAnimationFrame((timestamp) => draw(timestamp, prevTimeStamp))
