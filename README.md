@@ -13,11 +13,13 @@ yarn start
 
 ### 사용 기술
 
+과제 구현에 필요한 기술은 하단 구현 설명에 상세히 작성하였습니다.
+
 - webpack : 과제의 규모에 적합하다고 생각했습니다.
 - husky, lint-staged : triple-eslint-config의 규칙을 활용
 - git actions : gh-pages로 배포
 - window.requestAnimationFrame API : 숫자 카운터 UI에서 부드러운 애니메이션 구현
-- transition animation : 섹션이 떠오르는 애니메이션
+- css transition : 섹션이 떠오르는 애니메이션
 - csd : 번거로운 스타일링 코드를 최소화하기 위해 배포해두었던 라이브러리를 사용했습니다.
 
 # 폴더 구조
@@ -59,11 +61,11 @@ yarn start
 
 ## 1. 애니메이션 카운터 컴포넌트 구현
 
-여러 js 코드가 실행될 수 있다는 것을 가정하고, 부드러운 애니메이션을 구현하기 위해 requestAnimationFrame을 사용했습니다.
+여러 js 코드가 실행될 수 있다는 것을 가정하고, 부드러운 애니메이션을 구현하기 위해 requestAnimationFrame을 사용했습니다. setInterval과는 다르게, 브라우저가 repaint하는 시점에만 콜백이 실행됩니다.
 
 ### 1.1 AnimationCounter 컴포넌트
 
-`AnimationCounter` 컴포넌트가 리렌더링될 때 불필요한 reconcilaation이 발생하지 않도록 state를 카원터 컴포넌트 내에서 관리하였고, 비즈니스 로직은 `useAnimationCount` 훅으로 분리했습니다.
+`AnimationCounter` 컴포넌트가 리렌더링될 때 불필요한 reconcilation이 발생하지 않도록 state를 카원터 컴포넌트 내에서 관리하였고, 비즈니스 로직은 `useAnimationCount` 훅으로 분리했습니다.
 
 ```ts
 // AnimationCounter.tsx
@@ -76,7 +78,7 @@ useEffect(() => {
 }, [shouldRequestAnimation, requestAnimation])
 ```
 
-숫자의 자릿수가 바뀔 때 자연스럽게 보여질 수 있도록 공간만을 확보하는 skeleton을 추가했습니다.
+숫자의 자릿수가 바뀔 때 자연스럽게 보여질 수 있도록 숫자의 길이가 최대일 때의 공간을 확보하는 skeleton을 추가했습니다.
 
 ```js
 // js
@@ -149,7 +151,7 @@ const draw = useCallback(
 
 ### 2.1 transition 애니메이션 적용
 
-transition을 사용해 떠오르는 애니메이션을 구현하였고, transition-delay를 이용해 100ms, 200ms 간격을 두었습니다.
+transition을 사용해 떠오르는 애니메이션을 구현하였고, transition-delay를 이용해 100ms, 200ms 간격을 두었습니다. 처음에는 keyfraems를 이용해 구현했었지만, DOM의 시작/끝 css 스타일과 keyframes의 시작/끝 css 스타일 동기화가 불가능해 발생하는 깜빡임 현상이 있어 transition을 사용했습니다.
 
 ```js
 const StyledAwardHeroImage = styled.div`
@@ -173,8 +175,9 @@ transition-delay: 200ms
 
 ### 2.2 IntersectionObserver를 통해 section이 보일 때 애니메이션 요청
 
-IntersectionObserver를 적용해 AwardSection이 노출될 때, Counter 애니메이션과 떠오르는 애니메이션을 적용해봤습니다.
+IntersectionObserver를 적용해 AwardSection이 노출될 때, Counter 애니메이션과 떠오르는 애니메이션이 실행되도록 구현했습니다.
 관련 비즈니스 로직은 `useIntersectionObserver` 훅으로 분리했습니다.
+타겟 entry와 init 옵션을 prop으로 전달받고 observe/unobserve하는 함수를 훅을 사용하는 곳으로 넘겨줍니다.
 
 ## 3. 환경설정
 
